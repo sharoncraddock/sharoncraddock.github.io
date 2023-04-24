@@ -1,11 +1,23 @@
 import './App.css'
-import ChangeByVoice from './components/change-by-voice';
 import Intro from './components/intro';
+import ColorChangeDemo from './components/color-change-demo';
+import SectionHeader from './components/section-header';
 import { useState } from 'react';
+
+// declare global {
+//   interface Window {
+//     SpeechRecognition?: any;
+//     webkitSpeechRecognition?: any;
+//     SpeechGrammarList?: any;
+//     webkitSpeechGrammarList?: any;
+//     SpeechRecognitionEvent?: any;
+//     webkitSpeechRecognitionEvent?: any;
+//   }
+// }
 
 function App() {
 
-  const [currentVoiceClass, setCurrentVoiceClass] = useState('');
+  const [currentVoiceClass, setCurrentVoiceClass] = useState('lime');
 
   
   // TODO: move all this color-changing code into its own file
@@ -45,7 +57,11 @@ function App() {
 
   return (
     <>
-      <Intro voiceClass={currentVoiceClass || 'lime' } />
+      <Intro voiceClass={currentVoiceClass} />
+      <SectionHeader section='01' heading='About Me' voiceClass={currentVoiceClass} />
+      <ColorChangeDemo />
+      <SectionHeader section='02' heading="Some Things I've Built" voiceClass={currentVoiceClass}/>
+      <SectionHeader section='03' heading="Get in Touch" voiceClass={currentVoiceClass}/>
       <button className="bg-slate-400" onClick={changeByVoice}>Listen for color</button>
     </>
   )
