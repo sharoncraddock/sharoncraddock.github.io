@@ -14,20 +14,9 @@ function App() {
   const [currentVoiceClass, setCurrentVoiceClass] = useState('lime');
   const [currentSpeechProgress, setCurrentSpeechProgress] = useState('Click the START button to say your color...');
 
-  const speechSupportedBrowser = webkitSpeechRecognition || false && webkitSpeechGrammarList || false;
-
   const vocabulary = [ 'aqua', 'fuchsia', 'lime', 'orange', 'salmon', 'violet', 'yellow' ];
-
   const changeByVoice = InitSpeechRecogition(setCurrentVoiceClass, setCurrentSpeechProgress);
 
-  function handleSpeechClick(){
-     if (!speechSupportedBrowser) {
-      alert('Sorry, your browser doesn\'t support speech recognition yet. :(');
-     } else {
-      changeByVoice();
-     }
-  }
-  
   return (
     <>
       <TopNav />
@@ -67,7 +56,7 @@ function App() {
           <p className="violet font-mono p-1 text-lg">Violet</p>
           <p className="salmon font-mono p-1 text-lg">Salmon</p>
         </div>
-        <button className="bg-slate-400 text-blue-950 text-sm" onClick={handleSpeechClick}>START</button>
+        <button className="bg-slate-400 text-blue-950 text-sm" onClick={changeByVoice}>START</button>
         <ColorChangeDemo voiceClass={currentVoiceClass} progressMessage={currentSpeechProgress} vocab={vocabulary} />
       </div>
 
