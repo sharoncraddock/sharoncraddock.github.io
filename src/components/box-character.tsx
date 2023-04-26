@@ -6,7 +6,7 @@ interface BoxCharacterProps {
 
 function BoxCharacter({ voiceClass }: BoxCharacterProps){
   return (
-    <div className={`bg-${voiceClass} body`}>
+    <div className={`bg-slate-400 bg-${voiceClass} body`}>
       <div className="eye-container">
         <div className="eyes">
         <div className="eye-white">

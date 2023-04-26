@@ -13,20 +13,19 @@ function App() {
 
   const [currentVoiceClass, setCurrentVoiceClass] = useState('lime');
   const [currentSpeechProgress, setCurrentSpeechProgress] = useState('Click the START button to say your color...');
-  // const [noSpeechMatch, setNoSpeechMatch] = useState(true);
 
   const speechSupportedBrowser = webkitSpeechRecognition || false && webkitSpeechGrammarList || false;
 
   const vocabulary = [ 'aqua', 'fuchsia', 'lime', 'orange', 'salmon', 'violet', 'yellow' ];
 
-  const changeByVoice = InitSpeechRecogition(vocabulary, setCurrentVoiceClass, setCurrentSpeechProgress);
+  const changeByVoice = InitSpeechRecogition(setCurrentVoiceClass, setCurrentSpeechProgress);
 
   function handleSpeechClick(){
-     // if (!speechSupportedBrowser) {
-     //  alert('Sorry, your browser doesn\'t support speech recognition yet. :(');
-     // } else {
+     if (!speechSupportedBrowser) {
+      alert('Sorry, your browser doesn\'t support speech recognition yet. :(');
+     } else {
       changeByVoice();
-     // }
+     }
   }
   
   return (

@@ -11,38 +11,33 @@
 //   }
 // }
 
-function InitSpeechRecogition(vocab, actionFunc, progressFunc){
-  if (webkitSpeechRecognition && webkitSpeechGrammarList) {
-    const grammar = `#JSGF V1.0; grammar vocab; public color = $vocab.join(" | ")};`;
-    const SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
-    const SpeechGrammarList = window.SpeechGrammarList || webkitSpeechGrammarList;
-    const recognition = new SpeechRecognition();
-    const speechRecognitionList = new SpeechGrammarList();
-    speechRecognitionList.addFromString(grammar, 1);
-    recognition.grammars = speechRecognitionList;
-    recognition.continuous = false;
-    recognition.lang = "en-US";
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
+import { isSafari } from 'react-device-detect';
 
-    return function changeByVoice() {
-      recognition.start();
+function InitSpeechRecogition(actionFunc, progressFunc){
+  const SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
+  const recognition = new SpeechRecognition();
+  recognition.continuous = false;
+  recognition.interimResults = isSafari;
+  recognition.lang = "en-US";
+  recognition.maxAlternatives = 1;
 
-      recognition.onaudiostart = () => {
-        progressFunc("Say your color now!");
-      };
+  return function changeByVoice() {
+    recognition.start();
 
-      recognition.onaudioend = () => {
-        progressFunc("Audio processing...");
-      };
+    recognition.onaudiostart = () => {
+      progressFunc("Say your color now!");
+    };
 
-      recognition.onresult = (event) => {
-        const spokenText = event.results[0][0].transcript.toLowerCase();
-        actionFunc(spokenText);
-        progressFunc(`I heard "${spokenText}".`);
-        recognition.stop();
-      };
-    }
+    recognition.onaudioend = () => {
+      progressFunc("Audio processing...");
+    };
+
+    recognition.onresult = (event) => {
+      const spokenText = event.results[0][0].transcript.toLowerCase();
+      actionFunc(spokenText);
+      progressFunc(`I heard "${spokenText}".`);
+      recognition.stop();
+    };
   }
 }
 
