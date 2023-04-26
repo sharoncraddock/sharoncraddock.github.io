@@ -3,23 +3,32 @@ import Intro from './components/intro';
 import ColorChangeDemo from './components/color-change-demo';
 import SectionHeader from './components/section-header';
 import InitSpeechRecogition from './components/speech-recognition';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import TopNav from './components/top-nav';
-import ArticleIcon from '@mui/icons-material/Article';
-import DownloadIcon from '@mui/icons-material/Download';
 import EmailIcon from '@mui/icons-material/Email';
-import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 
 function App() {
 
   const [currentVoiceClass, setCurrentVoiceClass] = useState('lime');
-  const [currentSpeechProgress, setCurrentSpeechProgress] = useState('Click the button to say your color');
+  const [currentSpeechProgress, setCurrentSpeechProgress] = useState('Click the START button to say your color...');
+  // const [noSpeechMatch, setNoSpeechMatch] = useState(true);
 
-  const vocabulary = [ 'aqua', 'cyan', 'fuchsia', 'lavender', 'lime', 'orange', 'salmon', 'yellow' ];
+  const speechSupportedBrowser = webkitSpeechRecognition || false && webkitSpeechGrammarList || false;
+
+  const vocabulary = [ 'aqua', 'fuchsia', 'lime', 'orange', 'salmon', 'violet', 'yellow' ];
 
   const changeByVoice = InitSpeechRecogition(vocabulary, setCurrentVoiceClass, setCurrentSpeechProgress);
+
+  function handleSpeechClick(){
+     // if (!speechSupportedBrowser) {
+     //  alert('Sorry, your browser doesn\'t support speech recognition yet. :(');
+     // } else {
+      changeByVoice();
+     // }
+  }
+  
   return (
     <>
       <TopNav />
@@ -45,8 +54,22 @@ function App() {
       <div className="mt-7">
         <p className={`${currentVoiceClass} text-md font-mono text-slate-400`}>Featured Project</p>
         <p className="text-2xl mb-5 font-sans font-bold">Voice-Controlled UI</p>
-        <ColorChangeDemo voiceClass={currentVoiceClass} progressMessage={currentSpeechProgress} />
-        <button className="rounded-full bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300" onClick={changeByVoice}>Change Theme Color</button>
+        <p className="text-base text-slate-400 font-sans mt-4 max-w-3xl max-w-prose">Use your voice to change the color of all of the colored elements on this page.</p>
+        <p className="text-base text-slate-400 font-sans max-w-3xl max-w-prose">(You'll need to allow the browser to access your microphone first).</p>
+
+        <p className="mt-4 mb-4 text-lg">Ready to try it?</p>
+        <p>Click the "START" button, then say one of the following colors:</p>
+        <div className="mb-4 flex flex-wrap">
+          <p className="fuchsia font-mono p-1 text-lg">Fuchsia</p>
+          <p className="orange font-mono p-1 text-lg">Orange</p>
+          <p className="yellow font-mono p-1 text-lg">Yellow</p>
+          <p className="lime font-mono p-1 text-lg">Lime</p>
+          <p className="aqua font-mono p-1 text-lg">Aqua</p>
+          <p className="violet font-mono p-1 text-lg">Violet</p>
+          <p className="salmon font-mono p-1 text-lg">Salmon</p>
+        </div>
+        <button className="bg-slate-400 text-blue-950 text-sm" onClick={handleSpeechClick}>START</button>
+        <ColorChangeDemo voiceClass={currentVoiceClass} progressMessage={currentSpeechProgress} vocab={vocabulary} />
       </div>
 
       <div className="mt-7">

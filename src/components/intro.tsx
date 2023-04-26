@@ -1,17 +1,15 @@
 import ChangeByVoice from './change-by-voice';
 
 interface IntroProps {
-	voiceClass: string;
-	className: string;
-
+  voiceClass: string;
 }
 
 function Intro({ voiceClass }: IntroProps ){
   return (
     <div>
-	  <ChangeByVoice changedClass={voiceClass}>
-	    <p className="text-xl pb-5 font-mono">Hi, my name is</p>
-	  </ChangeByVoice>
+    <ChangeByVoice changedClass={voiceClass}>
+      <p className="text-xl pb-5 font-mono">Hi, my name is</p>
+    </ChangeByVoice>
 
       <p className="text-5xl leading-11 md:text-6xl text-white font-sans font-bold mb-4">
         Sharon Craddock.
