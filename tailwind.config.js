@@ -4,11 +4,24 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
-    fontFamily: {
-        'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
-        'mono': ['Inconsolata', 'SFMono-Regular'],
+    extend: {
+      spacing: {
+        '7': '4rem',
+        '8': '5rem',
+        '9': '6rem',
+        '10': '7rem',
+        '11': '8rem',
+        '12': '9rem',
+        '13': '10rem',
+      },
+      lineHeight: {
+        '11': '3.5rem',
       }
+    },
+    fontFamily: {
+      'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
+      'mono': ['Inconsolata', 'SFMono-Regular'],
+    },
   },
   plugins: [],
 }
