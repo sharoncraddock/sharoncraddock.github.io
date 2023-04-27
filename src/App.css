@@ -100,7 +100,21 @@ body {
   width: 36px;
 }
 
-.contact-link.contact-link--gh svg  {
+.contact-link svg:hover {
+  border-bottom: 1px solid #fff;
+  fill: #fff;
+}
+
+.contact-link.contact-link--gh svg {
   height: 30px;
   width: 30px;
+}
+
+.contact-link--resume {
+  color: #CBD5E0;
+}
+
+.contact-link--resume:hover {
+  color: #fff;
+  border-color: #fff;
 }

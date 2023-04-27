@@ -7,7 +7,7 @@ interface BoxCharacterProps {
 
 function BoxCharacter({ voiceClass, onPress }: BoxCharacterProps){
   return (
-    <button className="p-0 pulse hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300" onClick={onPress}>
+    <button className="p-0 pulse hover:bg-violet-600 focus:ring focus:ring-violet-300" onClick={onPress}>
       <div className={`bg-slate-400 bg-${voiceClass} body`}>
         <div className="eye-container">
           <div className="eyes">
