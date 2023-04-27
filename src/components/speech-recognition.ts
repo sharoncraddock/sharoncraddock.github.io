@@ -13,7 +13,7 @@
 
 import { isSafari } from 'react-device-detect';
 
-function InitSpeechRecogition(actionFunc, progressFunc){
+function InitSpeechRecogition(actionFunc, progressFunc, matchMessageFunc, vocab){
   const SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
   const recognition = new SpeechRecognition();
   recognition.continuous = false;
@@ -22,6 +22,7 @@ function InitSpeechRecogition(actionFunc, progressFunc){
   recognition.maxAlternatives = 1;
 
   return function changeByVoice() {
+    matchMessageFunc(false);
     recognition.start();
 
     recognition.onaudiostart = () => {
@@ -34,6 +35,9 @@ function InitSpeechRecogition(actionFunc, progressFunc){
 
     recognition.onresult = (event) => {
       const spokenText = event.results[0][0].transcript.toLowerCase();
+      if (!vocab.includes(spokenText)) {
+        matchMessageFunc(true);
+      }
       actionFunc(spokenText);
       progressFunc(`I heard "${spokenText}".`);
       recognition.stop();

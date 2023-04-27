@@ -7,15 +7,19 @@ import { useState } from 'react';
 import TopNav from './components/top-nav';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import BoxCharacter from './components/box-character';
+import ColorChangeInstructions from './components/color-change-instructions';
+import AboutMe from './components/about-me';
 
 
 function App() {
 
   const [currentVoiceClass, setCurrentVoiceClass] = useState('lime');
-  const [currentSpeechProgress, setCurrentSpeechProgress] = useState('Click the START button to say your color...');
-
+  const [currentSpeechProgress, setCurrentSpeechProgress] = useState('<-- Click this guy to say your color...');
+  const [displayNoMatchMessage, setDisplayNoMatchMessage] = useState(false);
+  
   const vocabulary = [ 'aqua', 'fuchsia', 'lime', 'orange', 'salmon', 'violet', 'yellow' ];
-  const changeByVoice = InitSpeechRecogition(setCurrentVoiceClass, setCurrentSpeechProgress);
+  const changeByVoice = InitSpeechRecogition(setCurrentVoiceClass, setCurrentSpeechProgress, setDisplayNoMatchMessage, vocabulary);
 
   return (
     <>
@@ -27,12 +31,7 @@ function App() {
       
       <div className="mt-13">
         <SectionHeader section='01' heading='About Me' voiceClass={currentVoiceClass} />
-        <p className="text-base text-slate-400 font-sans max-w-3xl max-w-prose mt-6">
-          I'm a frontend software engineer with almost 8 years of professional experience. In my previous role at <a href="https://www.varsitytutors.com" className={`${currentVoiceClass} underline underline-offset-2 decoration-1 hover:border-blue-400`}>Varsity Tutors</a>, I built and improved technology used by tens of thousands of students, tutors and teachers all around the world as part of their educational journeys. I also had the special experience of growing with that company as it matured from a scrappy startup through its IPO and beyond.
-        </p>
-        <p className="text-base text-slate-400 font-sans mt-4 max-w-3xl max-w-prose">
-          As an engineer, I feel that delivering seamless, efficient and enjoyable digital experiences to the end user is my main responsibility, and is the most rewarding part of my job.
-        </p>
+        <AboutMe voiceClass={currentVoiceClass} />
       </div>
       
       <div className="mt-10">
@@ -42,22 +41,16 @@ function App() {
       <div className="mt-7">
         <p className={`${currentVoiceClass} text-md font-mono text-slate-400`}>Featured Project</p>
         <p className="text-2xl mb-5 font-sans font-bold">Voice-Controlled UI</p>
-        <p className="text-base text-slate-400 font-sans mt-4 max-w-3xl max-w-prose">Use your voice to change the color of all of the colored elements on this page.</p>
-        <p className="text-base text-slate-400 font-sans max-w-3xl max-w-prose">(You'll need to allow the browser to access your microphone first).</p>
-
-        <p className="mt-4 mb-4 text-lg">Ready to try it?</p>
-        <p>Click the "START" button, then say one of the following colors:</p>
-        <div className="mb-4 flex flex-wrap">
-          <p className="fuchsia font-mono p-1 text-lg">Fuchsia</p>
-          <p className="orange font-mono p-1 text-lg">Orange</p>
-          <p className="yellow font-mono p-1 text-lg">Yellow</p>
-          <p className="lime font-mono p-1 text-lg">Lime</p>
-          <p className="aqua font-mono p-1 text-lg">Aqua</p>
-          <p className="violet font-mono p-1 text-lg">Violet</p>
-          <p className="salmon font-mono p-1 text-lg">Salmon</p>
+        <ColorChangeInstructions />
+        <div className="flex items-center">
+          <BoxCharacter voiceClass={currentVoiceClass} onPress={changeByVoice} />
+          <ColorChangeDemo 
+            voiceClass={currentVoiceClass} 
+            progressMessage={currentSpeechProgress} 
+            vocab={vocabulary} 
+            displayNoMatchMessage={displayNoMatchMessage}
+          />
         </div>
-        <button className="bg-slate-400 text-blue-950 text-sm" onClick={changeByVoice}>START</button>
-        <ColorChangeDemo voiceClass={currentVoiceClass} progressMessage={currentSpeechProgress} vocab={vocabulary} />
       </div>
 
       <div className="mt-7">

@@ -52,6 +52,20 @@
   border-radius: 0 0 5rem 5rem;
 }
 
+.pulse {
+  animation: pulse-animation 3s infinite;
+  border-radius: 3px;
+}
+
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 0px rgba(211, 211, 211);
+  }
+  100% {
+    box-shadow: 0 0 0 8px rgba(0, 0, 0, 0);
+  }
+}
+
 /*@keyframes eye-movement {
    0%   { left: 8px; }
   100%  { left: 0px; }

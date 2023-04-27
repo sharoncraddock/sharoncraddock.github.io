@@ -1,22 +1,16 @@
-import BoxCharacter from './box-character';
-
 interface ColorChangeDemoProps {
-  voiceClass: string;
   progressMessage: string;
-  vocab: string[];
+  displayNoMatchMessage: boolean;
 }
 
-function ColorChangeDemo({ voiceClass, progressMessage, vocab }: ColorChangeDemoProps) {
+function ColorChangeDemo({ progressMessage, displayNoMatchMessage }: ColorChangeDemoProps) {
   return (
     <>
-      <div className="flex mt-4">
-        <BoxCharacter voiceClass={voiceClass} />
-        <div className="ml-4">
-          <p className="">{progressMessage}</p>
-          { !vocab.includes(voiceClass) && 
-            <p className="">Hmm, I didn't hear a matching color that time, try again!</p>
-          }
-        </div>
+      <div className="ml-6">
+        <p className="">{progressMessage}</p>
+        { displayNoMatchMessage &&
+          <p className="">That wasn't a matching color, try again!</p>
+        }
       </div>
     </>
   );
