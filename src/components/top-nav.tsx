@@ -4,7 +4,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 function TopNav(){
   return (
-    <div className="fixed p-4 border-b bg-blue-custom border-slate-400 top-0 left-0 right-0 z-10">
+    <div className="fixed p-4 border-b bg-custom-blue border-slate-400 top-0 left-0 right-0 z-10">
       <div className="flex justify-center md:justify-end">
         <div className="w-60 flex justify-evenly items-center">
             <a className="contact-link contact-link--gh" href="https://github.com/sharoncraddock"><GitHubIcon /></a>

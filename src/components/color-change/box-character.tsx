@@ -1,4 +1,4 @@
-import './box-character.css';
+import './box-character.scss';
 
 interface BoxCharacterProps {
   voiceClass: string;

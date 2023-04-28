@@ -16,11 +16,15 @@ export default {
       },
       lineHeight: {
         '11': '3.5rem',
-      }
+      },
+      colors: {
+        'custom-blue': '#0a192f',
+      },
     },
     fontFamily: {
       'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
       'mono': ['Inconsolata', 'SFMono-Regular'],
+      'split-flap': ['Oswald', 'ui-sans-serif'],
     },
   },
   plugins: [],
