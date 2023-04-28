@@ -1,4 +1,4 @@
-import './App.css'
+import './App.scss'
 import Intro from './components/intro';
 import ColorChangeDemo from './components/color-change/color-change-demo';
 import SectionHeader from './components/section-header';
@@ -10,6 +10,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import BoxCharacter from './components/color-change/box-character';
 import ColorChangeInstructions from './components/color-change/color-change-instructions';
 import AboutMe from './components/about-me';
+import SplitFlapTable from './components/split-flap/split-flap';
 
 
 function App() {
@@ -62,7 +63,7 @@ function App() {
       <div className="mt-7">
         <p className={`${currentVoiceClass} text-md font-mono text-slate-400`}>Featured Project</p>
         <p className="text-2xl mb-5 font-sans font-bold">Split-Flap Display</p>
-        <p>Coming Soon!!</p>
+        <SplitFlapTable />
       </div>
       
       <div className="mt-7 mb-13">
