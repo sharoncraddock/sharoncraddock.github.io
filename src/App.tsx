@@ -1,14 +1,14 @@
 import './App.css'
 import Intro from './components/intro';
-import ColorChangeDemo from './components/color-change-demo';
+import ColorChangeDemo from './components/color-change/color-change-demo';
 import SectionHeader from './components/section-header';
-import InitSpeechRecogition from './components/speech-recognition';
+import InitSpeechRecogition from './components/speech-recognition/speech-recognition';
 import { useState } from 'react';
 import TopNav from './components/top-nav';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import BoxCharacter from './components/box-character';
-import ColorChangeInstructions from './components/color-change-instructions';
+import BoxCharacter from './components/color-change/box-character';
+import ColorChangeInstructions from './components/color-change/color-change-instructions';
 import AboutMe from './components/about-me';
 
 

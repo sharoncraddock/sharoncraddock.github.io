@@ -1,4 +1,4 @@
-import ChangeByVoice from './change-by-voice';
+import ChangeByVoice from './speech-recognition/change-by-voice';
 
 interface IntroProps {
   voiceClass: string;
