@@ -56,14 +56,14 @@ function App() {
 
       <div className="mt-7">
         <p className={`${currentVoiceClass} text-md font-mono text-slate-400`}>Featured Project</p>
-        <p className="text-2xl mb-5 font-sans font-bold">Recipe Extractor</p>
-        <p>Coming Soon!!</p>
+        <p className="text-2xl mb-5 font-sans font-bold">Solari/Split-Flap Display</p>
+        <SplitFlapTable voiceClass={currentVoiceClass} />
       </div>
 
       <div className="mt-7">
         <p className={`${currentVoiceClass} text-md font-mono text-slate-400`}>Featured Project</p>
-        <p className="text-2xl mb-5 font-sans font-bold">Split-Flap Display</p>
-        <SplitFlapTable />
+        <p className="text-2xl mb-5 font-sans font-bold">Recipe Extractor</p>
+        <p>Coming Soon!!</p>
       </div>
       
       <div className="mt-7 mb-13">

@@ -27,12 +27,20 @@ body {
   background-color: salmon;
 }
 
+.border-salmon {
+  border-color: salmon;
+}
+
 .yellow {
   color: yellow;
 }
 
 .bg-yellow {
   background-color: yellow;
+}
+
+.border-yellow {
+  border-color: yellow;
 }
 
 .lime {
@@ -43,12 +51,20 @@ body {
   background-color: lime;
 }
 
+.border-lime {
+  border-color: lime;
+}
+
 .orange {
   color: orange;
 }
 
 .bg-orange {
   background-color: orange;
+}
+
+.border-orange {
+  border-color: orange;
 }
 
 .aqua {
@@ -59,6 +75,10 @@ body {
   background-color: aqua;
 }
 
+.border-aqua {
+  border-color: aqua;
+}
+
 .fuchsia {
   color: fuchsia;
 }
@@ -67,12 +87,20 @@ body {
   background-color: fuchsia;
 }
 
+.border-fuchsia {
+  border-color: fuchsia;
+}
+
 .violet {
   color: #CF9FFF;
 }
 
 .bg-violet {
   background-color: #CF9FFF;
+}
+
+.border-violet {
+  border-color: violet;
 }
 
 .section-heading::after {

@@ -4,11 +4,15 @@ import quotes from './quotes';
 import { useState, useEffect } from 'react';
 import { isDesktop } from 'react-device-detect';
 
-const rowLength = isDesktop ? 20 : 14;
+const rowLength = isDesktop ? 20 : 10;
 
-function SplitFlapTable(){
+interface SplitFlapTableProps {
+  voiceClass: string;
+}
 
-  const [message, setMessage] = useState('Whatever you are, be a good one.');
+function SplitFlapTable({ voiceClass }: SplitFlapTableProps){
+
+  const [message, setMessage] = useState('');
   const [table, setTable] = useState(null);
 
   function selectedMessage(messageArray: Array<object>){
@@ -43,7 +47,7 @@ function SplitFlapTable(){
   function tableData(item: Array<string>) {
     const itemIndividualChars = [...item.toUpperCase()];
     return itemIndividualChars.map((char) => 
-      <td className="bg-slate-400 border border-custom-blue text-center td-width">
+      <td className="bg-slate-300 border border-custom-blue text-center td-width">
         <CharacterCycler stopCharacter={char} quote={message} />
       </td>);
   }
@@ -74,10 +78,11 @@ function SplitFlapTable(){
 
   return (
     <>
-      <div className="">
-        <p className="text-white">Need some inspiration? Click to display a new quote.</p>
-          <button onClick={handleClick} className="">New Quote</button>
-      </div>
+      <p className="text-base font-sans text-slate-400">
+        Split-flap displays (sometimes referred to as Solari boards, after the original inventor) are considered retro or nostalgic these days, but in the pre-digital age, they were commonly used in airports and train stations to display arrival and departure times. Rows are comprised of individual characters containing a circular collection of flaps, which rotate in unison through a sequence of numbers and letters and stop on the desired character. The rotating flaps create a distinct sound that attracts attention when the information updates.
+      </p>
+      <p className="text-white mt-6">Need some inspiration? Click the button to display a new quote.</p>
+        <button onClick={handleClick} className={`border border-${voiceClass} rounded hover:bg-slate-400 bg-white text-xs text-custom-blue uppercase mt-4 mb-4`}>New Quote</button>
       <div className="">
         {table}
       </div>

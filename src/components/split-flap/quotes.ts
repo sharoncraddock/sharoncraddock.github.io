@@ -8,7 +8,8 @@ const quotes = [
     { quote: 'Opportunities don\'t happen, you create them.', author: 'Chris Grosser'},
     { quote: 'Everything you\'ve ever wanted is on the other side of fear.', author: 'George Addair'},
     { quote: 'It is never too late to be what you might have been.', author: 'Adelaide Anne Procter'},
-    
+    { quote: 'Never say never, because limits, like fears, are often just an illusion.', author: 'Michael Jordan'},
+    { quote: 'The most difficult thing is the decision to act, the rest is merely tenacity.', author: 'Amelia Earhart'}
  ];
 
 export default quotes;
