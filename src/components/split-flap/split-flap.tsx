@@ -12,17 +12,19 @@ interface SplitFlapTableProps {
 
 function SplitFlapTable({ voiceClass }: SplitFlapTableProps){
 
-  const [message, setMessage] = useState('');
-  const [table, setTable] = useState(null);
-
-  function selectedMessage(messageArray: Array<object>){
-    return messageArray[Math.floor(Math.random() * messageArray.length)];
+  const [quote, setQuote] = useState('This is a quote that is at the start of the render');
+  console.log('current quote state ' + quote);
+  
+  // selects a single quote from the array of quotes
+  function selectedQuote(quoteArray: Array<string>){
+    return quoteArray[Math.floor(Math.random() * quoteArray.length)];
   }
 
-  function messageRows(message: string, rowLength: number){
-    if (!message) return;
-    let finalArray = [];
-      const words = message.split(' ');
+  // splits quote into individual rows and returns an array of those rows
+  function quoteInRows(quote: string, rowLength: number){
+    if (!quote) return [];
+    let quoteRowsArray = [];
+      const words = quote.split(' ');
       while (words.length) {
         let line = '';
         while (words.length) {
@@ -31,49 +33,49 @@ function SplitFlapTable({ voiceClass }: SplitFlapTableProps){
             line = trialLine;
             words.shift();
           } else {
-            finalArray.push(line.trim());
+            quoteRowsArray.push(line.trim());
             line = '';
             break;
           }
         }
         // line that was too short to trigger push
         if (line.length) {
-          finalArray.push(line.trim());
+          quoteRowsArray.push(line.trim());
         }
       }
-      return finalArray;
+      return quoteRowsArray;
   }
 
+  // uppercase each individual character and pass it to the Cycler
   function tableData(item: Array<string>) {
     const itemIndividualChars = [...item.toUpperCase()];
-    return itemIndividualChars.map((char) => 
-      <td className="bg-slate-300 border border-custom-blue text-center td-width">
-        <CharacterCycler stopCharacter={char} quote={message} />
+    return itemIndividualChars.map((char, index) => 
+      <td key={`${index}-${char}`} className="bg-slate-300 border border-custom-blue text-center td-width">
+        <CharacterCycler stopCharacter={char} quote={quote} />
       </td>);
   }
   
   function tableRows(quote: Array<string>){
-    if (!quote) return;
+    if (!quote) return [];
     return (
-      <table className="border-collapse">
-        <tbody>
-           {quote.map(
-            (item: string) => <tr className="border border-custom-blue">{tableData(item.padEnd(rowLength - 1, ' '))}</tr>
-           )}
-        </tbody>
-      </table>
-      );
+      <>
+       {quote.map(
+        (item: string, index: number) => 
+          <tr key={`${index}-${item.charAt(0)}`} className="border border-custom-blue">
+            {tableData(item.padEnd(rowLength - 1, ' '))}
+          </tr>
+       )}
+      </>
+    );
   }
 
   function handleClick(){
-    const updatedMessage = selectedMessage(quotes);
-    setMessage(updatedMessage.quote);
-    setTable(finalTable(updatedMessage.quote));
+    setQuote(selectedQuote(quotes));
   }
 
-  function finalTable(messg: string){
-   const messgInRows = messageRows(messg, rowLength);
-   return tableRows(messgInRows);
+  function completedQuote(quote: string){
+   const quoteReadyForTable = quoteInRows(quote, rowLength);
+   return tableRows(quoteReadyForTable);
   }
 
   return (
@@ -84,7 +86,11 @@ function SplitFlapTable({ voiceClass }: SplitFlapTableProps){
       <p className="text-white mt-6">Need some inspiration? Click the button to display a new quote.</p>
         <button onClick={handleClick} className={`border border-${voiceClass} rounded hover:bg-slate-400 bg-white text-xs text-custom-blue uppercase mt-4 mb-4`}>New Quote</button>
       <div className="">
-        {table}
+        <table className="border-collapse">
+          <tbody>
+            {completedQuote(quote)}
+          </tbody>
+        </table>
       </div>
      </>
   )

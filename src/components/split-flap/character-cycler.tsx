@@ -28,7 +28,11 @@ function CharacterCycler({ stopCharacter, quote }: LetterCyclerProps) {
 
   // run on initial component render only
   useEffect(() => {
-    counter(0, stopCharacter);
+    const timeout = counter(0, stopCharacter);
+
+    return function() {
+      clearTimeout(timeout);
+    }
   }, [quote]);
 
   return <span className="text-4xl font-split-flap text-custom-blue">{character}</span>;
