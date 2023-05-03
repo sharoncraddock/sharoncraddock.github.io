@@ -2,9 +2,7 @@ import '../split-flap/split-flap.scss';
 import CharacterCycler from './character-cycler';
 import quotes from './quotes';
 import { useState, useEffect } from 'react';
-import { isDesktop } from 'react-device-detect';
-
-const rowLength = isDesktop ? 20 : 10;
+import { isMobile } from 'react-device-detect';
 
 interface SplitFlapTableProps {
   voiceClass: string;
@@ -12,12 +10,21 @@ interface SplitFlapTableProps {
 
 function SplitFlapTable({ voiceClass }: SplitFlapTableProps){
 
-  const [quote, setQuote] = useState('This is a quote that is at the start of the render');
-  console.log('current quote state ' + quote);
-  
+  const rowLength = isMobile ? 10 : 20;
+  const [quote, setQuote] = useState('It is never too late to be what you might have been.');
+
   // selects a single quote from the array of quotes
   function selectedQuote(quoteArray: Array<string>){
-    return quoteArray[Math.floor(Math.random() * quoteArray.length)];
+    // remove previous quote from array so it won't be duplicated
+    const previousQuoteIndex = quoteArray.findIndex((item) => item === quote);
+    if (previousQuoteIndex >= 0) {
+      quoteArray.splice(previousQuoteIndex, 1);
+    }
+    if (!quoteArray.length) {
+      return 'You\'ve seen all the quotes I have for now!';
+    } else {
+      return quoteArray[Math.floor(Math.random() * quoteArray.length)];
+    }
   }
 
   // splits quote into individual rows and returns an array of those rows
@@ -75,7 +82,8 @@ function SplitFlapTable({ voiceClass }: SplitFlapTableProps){
 
   function completedQuote(quote: string){
    const quoteReadyForTable = quoteInRows(quote, rowLength);
-   return tableRows(quoteReadyForTable);
+   const tableReadyQuote = tableRows(quoteReadyForTable);
+   return tableReadyQuote;
   }
 
   return (
