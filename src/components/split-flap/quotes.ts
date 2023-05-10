@@ -11,7 +11,7 @@ const quotes = [
   'The best time to plant a tree was 20 years ago. The next best time is now.',
   'Talent hits a target no one else can hit. Genius hits a target no one else can see.',
   'Don\'t judge each day by the harvest you reap, but by the seeds that you plant.',
-  'The most important step one can take is not the first one - it\'s the next one.',
+  'The most important step one can take is not the first one. It\'s the next one.',
   'Believe you can and you\'re halfway there.',
   'Someday is not a day of the week.'
  ];
