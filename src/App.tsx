@@ -10,7 +10,9 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import BoxCharacter from './components/color-change/box-character';
 import ColorChangeInstructions from './components/color-change/color-change-instructions';
 import AboutMe from './components/about-me';
-import SplitFlapTable from './components/split-flap/split-flap';
+import { ErrorBoundary } from "react-error-boundary";
+import SplitFlapInfo from './components/split-flap/split-flap-info';
+import SplitFlapImproved from './components/split-flap-improved/split-flap-improved';
 
 
 function App() {
@@ -57,7 +59,10 @@ function App() {
       <div className="mt-7">
         <p className={`${currentVoiceClass} text-md font-mono text-slate-400`}>Featured Project</p>
         <p className="text-2xl mb-5 font-sans font-bold">Solari/Split-Flap Display</p>
-        <SplitFlapTable voiceClass={currentVoiceClass} />
+        <SplitFlapInfo />
+        <ErrorBoundary fallback={<div>Oops, something went wrong! :(</div>}>
+          <SplitFlapImproved />
+        </ErrorBoundary>
       </div>
 
       <div className="mt-7">
