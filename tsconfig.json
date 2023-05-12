@@ -20,7 +20,7 @@
     "noFallthroughCasesInSwitch": true
   },
   "exclude": [
-    "src/components/speech-recognition.ts",
+    "src/components/speech-recognition/speech-recognition.ts",
     "src/App.tsx",
     "src/main.tsx"
   ],

@@ -1,16 +1,5 @@
 // TODO: configure types/signatures
 
-// declare global {
-//   interface Window {
-//     SpeechRecognition?: any;
-//     webkitSpeechRecognition?: any;
-//     SpeechGrammarList?: any;
-//     webkitSpeechGrammarList?: any;
-//     SpeechRecognitionEvent?: any;
-//     webkitSpeechRecognitionEvent?: any;
-//   }
-// }
-
 import { isSafari } from 'react-device-detect';
 
 function InitSpeechRecogition(actionFunc, progressFunc, matchMessageFunc, vocab){

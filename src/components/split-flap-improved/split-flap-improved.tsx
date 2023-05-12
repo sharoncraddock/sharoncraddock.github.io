@@ -1,6 +1,6 @@
 
 import quotes from '../../components/split-flap/quotes';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import QuoteTable from './quote-table';
 
 const inspirationalQuotes = [...quotes];

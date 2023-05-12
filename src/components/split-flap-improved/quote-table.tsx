@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import CharacterCyclerImproved from './character-cycler-improved';
 import { isMobile } from 'react-device-detect';
 
 const letters = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
@@ -7,7 +6,11 @@ const punctuation = ["'",'-','.',",", '!', '?'];
 
 const characters = [' ', ...letters, ...punctuation];
 
-function QuoteTable({quote}){
+interface QuoteTableProps {
+  quote: string;
+}
+
+function QuoteTable({ quote }: QuoteTableProps){
 
   const rowLength = isMobile ? 10 : 20;
   const maxRows = isMobile ? 10 : 5;
@@ -21,7 +24,8 @@ function QuoteTable({quote}){
   }
 
   const [currentState, setCurrentState] = useState(initialState(rowLength, maxRows));
-
+  // temp workaround due to React shallow equality/invisible state updates in inner arrays
+  // @ts-expect-error
   const [count, setCount] = useState(0);
 
   // splits quote into individual rows and returns an array of those rows
@@ -55,12 +59,12 @@ function QuoteTable({quote}){
 
   const quoteForTable = quoteInRows(quote, rowLength);
 
-  function tableRows(quote: Array<string>){
+  function tableRows(quote: Array<string>[]){
     if (!quote) return [];
     return (
       <>
        {quote.map(
-        (item: Array<string>, index: number) => 
+        (item: Array<string>) => 
           <tr className="border border-custom-blue">
             {tableData(item)}
           </tr>
@@ -69,7 +73,7 @@ function QuoteTable({quote}){
     );
   }
 
-  function advanceState(currentState: Array<string>, finalState: Array<string>){
+  function advanceState(currentState: Array<string>[], finalState: Array<string>){
     for (let row = 0; row < finalState.length; row++){
       for(let col = 0; col < finalState[row].length; col++) {
         if (currentState[row][col] !== finalState[row][col]) {
@@ -87,14 +91,14 @@ function QuoteTable({quote}){
       setCurrentState((prevState) => advanceState(prevState, quoteForTable))
       // temp workaround due to React shallow equality/invisible state updates in inner arrays
       setCount((prevCount) => prevCount + 1);
-    }, 125);
+    }, 140);
     return () => {
       clearInterval(timeout);
     }
   }, [quote]);
 
   function tableData(item: Array<string>) {
-    return item.map((char, index) => 
+    return item.map((char) => 
       <td className="bg-slate-300 border border-custom-blue text-center td-width text-4xl font-split-flap text-custom-blue">
         {char}
       </td>);

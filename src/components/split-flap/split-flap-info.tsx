@@ -1,8 +1,5 @@
-interface SplitFlapInfoProps {
-  voiceClass: string;
-}
 
-function SplitFlapInfo ({ voiceClass }: SplitFlapInfoProps){
+function SplitFlapInfo(){
   return (
     <>
       <p className="text-base font-sans text-slate-400">
