@@ -59,7 +59,7 @@ function App() {
       <div className="mt-7">
         <p className={`${currentVoiceClass} text-md font-mono text-slate-400`}>Featured Project</p>
         <p className="text-2xl mb-5 font-sans font-bold">Solari/Split-Flap Display</p>
-        <SplitFlapInfo />
+        <SplitFlapInfo voiceClass={currentVoiceClass} />
         <ErrorBoundary fallback={<div>Oops, something went wrong! :(</div>}>
           <SplitFlapImproved />
         </ErrorBoundary>

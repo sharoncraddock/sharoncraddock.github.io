@@ -64,8 +64,11 @@ function QuoteTable({ quote }: QuoteTableProps){
     return (
       <>
        {quote.map(
-        (item: Array<string>) => 
-          <tr className="border border-custom-blue">
+        (item: Array<string>, index: number) => 
+          <tr 
+            className="border border-custom-blue"
+            key={index}
+          >
             {tableData(item)}
           </tr>
        )}
@@ -98,8 +101,10 @@ function QuoteTable({ quote }: QuoteTableProps){
   }, [quote]);
 
   function tableData(item: Array<string>) {
-    return item.map((char) => 
-      <td className="bg-slate-300 border border-custom-blue text-center td-width text-4xl font-split-flap text-custom-blue">
+    return item.map((char, index) => 
+      <td
+        key={`${index}-${char}`}
+        className="bg-slate-300 border border-custom-blue text-center td-width text-4xl font-split-flap text-custom-blue">
         {char}
       </td>);
   }
