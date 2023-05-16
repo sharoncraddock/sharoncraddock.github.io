@@ -5,14 +5,15 @@ import SectionHeader from './components/section-header';
 import InitSpeechRecogition from './components/speech-recognition/speech-recognition';
 import { useState } from 'react';
 import TopNav from './components/top-nav';
-import EmailIcon from '@mui/icons-material/Email';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import BoxCharacter from './components/color-change/box-character';
 import ColorChangeInstructions from './components/color-change/color-change-instructions';
+import { ColorContext } from './components/color-context';
 import AboutMe from './components/about-me';
+import GetInTouch from './components/get-in-touch';
 import { ErrorBoundary } from "react-error-boundary";
 import SplitFlapInfo from './components/split-flap/split-flap-info';
 import SplitFlapImproved from './components/split-flap-improved/split-flap-improved';
+import Eyebrow from './components/eyebrow';
 
 
 function App() {
@@ -27,65 +28,60 @@ function App() {
   return (
     <>
       <TopNav />
-
-      <div className="mt-13">
-        <Intro voiceClass={currentVoiceClass} />
-      </div>
-      
-      <div className="mt-13">
-        <SectionHeader section='01' heading='About Me' voiceClass={currentVoiceClass} />
-        <AboutMe voiceClass={currentVoiceClass} />
-      </div>
-      
-      <div className="mt-10">
-        <SectionHeader section='02' heading="Some Things I've Built" voiceClass={currentVoiceClass}/>
-      </div>
-
-      <div className="mt-7">
-        <p className={`${currentVoiceClass} text-md font-mono text-slate-400`}>Featured Project</p>
-        <p className="text-2xl mb-5 font-sans font-bold">Voice-Controlled UI</p>
-        <ColorChangeInstructions />
-        <div className="flex items-center">
-          <BoxCharacter voiceClass={currentVoiceClass} onPress={changeByVoice} />
-          <ColorChangeDemo 
-            voiceClass={currentVoiceClass} 
-            progressMessage={currentSpeechProgress} 
-            vocab={vocabulary} 
-            displayNoMatchMessage={displayNoMatchMessage}
+      <ColorContext.Provider value={currentVoiceClass}>
+        <div className="mt-13">
+          <Intro />
+        </div>
+        
+        <div className="mt-13">
+          <SectionHeader 
+            section='01'
+            heading='About Me' 
+          />
+          <AboutMe />
+        </div>
+        
+        <div className="mt-10">
+          <SectionHeader 
+            section='02' 
+            heading="Some Things I've Built" 
           />
         </div>
-      </div>
 
-      <div className="mt-7">
-        <p className={`${currentVoiceClass} text-md font-mono text-slate-400`}>Featured Project</p>
-        <p className="text-2xl mb-5 font-sans font-bold">Solari/Split-Flap Display</p>
-        <SplitFlapInfo voiceClass={currentVoiceClass} />
-        <ErrorBoundary fallback={<div>Oops, something went wrong! :(</div>}>
-          <SplitFlapImproved />
-        </ErrorBoundary>
-      </div>
-
-      <div className="mt-7">
-        <p className={`${currentVoiceClass} text-md font-mono text-slate-400`}>Featured Project</p>
-        <p className="text-2xl mb-5 font-sans font-bold">Recipe Extractor</p>
-        <p>Coming Soon!!</p>
-      </div>
-      
-      <div className="mt-7 mb-13">
-        <SectionHeader section='03' heading="Get in Touch" voiceClass={currentVoiceClass} />
-        <p className="text-xl font-bold mt-6">Yes!</p>
-        <p className="text-base text-slate-400 font-sans max-w-3xl max-w-prose mt-6">
-          I am looking for new opportunities at this time.
-        </p>
-        <p className="text-base text-slate-400 font-sans max-w-3xl max-w-prose mt-2">
-          I'd love to chat with you about your needs and goals, so feel free to reach out to me over email or LinkedIn. :)
-        </p>
-        <div className="w-20 flex justify-between mt-4">
-            <a className="contact-link" href="https://www.linkedin.com/in/sharoncraddock/"><LinkedInIcon /></a>
-            <a className="contact-link" href="mailto:sharoncraddock.tech@gmail.com?subject=Hello!&body=I%20visited%20your%20profile%20site%20and%20wanted%20to%20reach%20out!%20%3A)"><EmailIcon /></a>
+        <div className="mt-7">
+          <Eyebrow text="Featured Project" />
+          <p className="text-2xl mb-5 font-sans font-bold">Voice-Controlled UI</p>
+          <ColorChangeInstructions />
+          <div className="flex items-center">
+            <BoxCharacter onPress={changeByVoice} />
+            <ColorChangeDemo 
+              progressMessage={currentSpeechProgress} 
+              vocab={vocabulary} 
+              displayNoMatchMessage={displayNoMatchMessage}
+            />
+          </div>
         </div>
 
-      </div>
+        <div className="mt-7">
+          <Eyebrow text="Featured Project" />
+          <p className="text-2xl mb-5 font-sans font-bold">Solari/Split-Flap Display</p>
+          <SplitFlapInfo />
+          <ErrorBoundary fallback={<div>Oops, something went wrong! :(</div>}>
+            <SplitFlapImproved />
+          </ErrorBoundary>
+        </div>
+
+        <div className="mt-7">
+          <Eyebrow text="Featured Project" />
+          <p className="text-2xl mb-5 font-sans font-bold">Recipe Extractor</p>
+          <p>Coming Soon!!</p>
+        </div>
+        
+        <div className="mt-7 mb-13">
+          <SectionHeader section='03' heading="Get in Touch" />
+          <GetInTouch />
+        </div>
+      </ColorContext.Provider>
     </>
   )
 }

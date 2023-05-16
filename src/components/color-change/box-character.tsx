@@ -1,11 +1,13 @@
 import './box-character.scss';
+import { useContext } from 'react';
+import { ColorContext } from '../../components/color-context';
 
 interface BoxCharacterProps {
-  voiceClass: string;
   onPress: () => void;
 }
 
-function BoxCharacter({ voiceClass, onPress }: BoxCharacterProps){
+function BoxCharacter({ onPress }: BoxCharacterProps){
+  const voiceClass = useContext(ColorContext);
   return (
     <button className="p-0 pulse hover:bg-violet-600 focus:ring focus:ring-violet-300" onClick={onPress}>
       <div className={`bg-slate-400 bg-${voiceClass} body`}>

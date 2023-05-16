@@ -1,8 +1,8 @@
-interface AboutMeProps {
-  voiceClass: string;
-}
+import { useContext } from 'react';
+import { ColorContext } from './color-context';
 
-function AboutMe({ voiceClass }: AboutMeProps) {
+function AboutMe() {
+  const voiceClass = useContext(ColorContext);
   return (
     <>
       <p className="text-base text-slate-400 font-sans max-w-3xl max-w-prose mt-6">
