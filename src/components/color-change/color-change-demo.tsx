@@ -1,10 +1,11 @@
 interface ColorChangeDemoProps {
   progressMessage: string;
-  displayNoMatchMessage: boolean;
+  // displayNoMatchMessage: boolean;
 }
 
 // TODO: adjust mismatch message timing
-function ColorChangeDemo({ progressMessage, displayNoMatchMessage }: ColorChangeDemoProps) {
+// function ColorChangeDemo({ progressMessage, displayNoMatchMessage }: ColorChangeDemoProps) {
+function ColorChangeDemo({ progressMessage }: ColorChangeDemoProps) {
   return (
     <>
       <div className="ml-6">
